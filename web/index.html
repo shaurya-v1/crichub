@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>CricHub</title>
+        <link rel="stylesheet" href="/styles.css" />
+        <script
+            type="module"
+            src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+        ></script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-shell">
+                <div class="brand-slot">
+                    <a href="/" class="brand-title"
+                        ><font color="#74e334">CricHub</font></a
+                    >
+                </div>
+
+                <nav class="main-nav" aria-label="Main navigation">
+                    <a class="nav-item" data-route="/" href="/">Home</a>
+                    <a class="nav-item" data-route="/players" href="/players"
+                        >Players</a
+                    >
+                    <a class="nav-item" data-route="/compare" href="/compare">
+                        Compare
+                    </a>
+                    <a
+                        class="nav-item"
+                        data-route="/predictor"
+                        href="/predictor"
+                        >Predictor</a
+                    >
+                </nav>
+
+                <div class="right-slot" aria-hidden="true"></div>
+            </div>
+        </header>
+
+        <main class="page-wrap">
+            <section id="page-home" class="page">
+                <div class="hero-grid">
+                    <div class="hero-copy">
+                        <h1>Stats don't lie.</h1>
+                        <p>
+                            Dive into player timelines and head-to-head
+                            comparisons.
+                        </p>
+                        <p>
+                            Settle your cricket debates with our match
+                            predictor. Real data, zero random guesses.
+                        </p>
+                    </div>
+
+                    <div class="hero-model">
+                        <div class="model-section">
+                            <model-viewer
+                                id="stadiumViewer"
+                                src="/cricket_stadium.glb"
+                                alt="3D Cricket Stadium"
+                                crossorigin="anonymous"
+                                camera-target="0m -4m 0m"
+                                camera-orbit="0deg 60deg 80m"
+                                min-camera-orbit="auto 60deg 80m"
+                                max-camera-orbit="auto 60deg 105m"
+                                disable-zoom
+                                disable-pan
+                                auto-rotate
+                                rotation-per-second="15deg"
+                                auto-rotate-delay="0"
+                                shadow-intensity="1"
+                                camera-controls
+                                interaction-prompt="none"
+                            >
+                            </model-viewer>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-players" class="page">
+                <div class="players-search-wrap" id="playersSearchWrap">
+                    <input
+                        id="playerSearchInput"
+                        class="player-search-input"
+                        type="text"
+                        placeholder="Enter player name"
+                        autocomplete="off"
+                    />
+                    <div
+                        id="playerSearchResults"
+                        class="player-search-results"
+                    ></div>
+                </div>
+
+                <div id="playerSearchHint" class="player-search-hint">
+                    Search a player to view role, batting/bowling styles, team
+                    timeline, and season stats.
+                </div>
+
+                <div id="playerProfile" class="player-profile hidden"></div>
+            </section>
+
+            <section id="page-compare" class="page">
+                <h2 class="compare-title">Player Comparison</h2>
+
+                <div class="compare-actions">
+                    <button id="addComparePlayerBtn" class="compare-add-btn">
+                        + Add Player
+                    </button>
+
+                    <div
+                        class="compare-search-wrap hidden"
+                        id="compareSearchWrap"
+                    >
+                        <input
+                            id="compareSearchInput"
+                            class="player-search-input"
+                            type="text"
+                            placeholder="Search Player"
+                            autocomplete="off"
+                        />
+                        <div
+                            id="compareSearchResults"
+                            class="player-search-results"
+                        ></div>
+                    </div>
+                </div>
+
+                <div id="compareCards" class="compare-cards"></div>
+                <div id="compareStats" class="compare-stats-wrap"></div>
+            </section>
+
+            <section id="page-predictor" class="page">
+                <h2>Match Prediction</h2>
+
+                <div class="match-cards" id="matchCards">
+                    <div class="team-card" id="teamCard1">
+                        <div class="team-logo-wrap">
+                            <img
+                                id="team1Logo"
+                                class="team-logo"
+                                alt="Team 1 logo"
+                            />
+                        </div>
+                        <div class="team-controls">
+                            <!-- Custom team selector 1 -->
+                            <div class="custom-select" id="team1Custom">
+                                <button
+                                    type="button"
+                                    class="select-trigger"
+                                    id="team1Trigger"
+                                >
+                                    <span class="trigger-content"
+                                        >Select Team</span
+                                    >
+                                    <span class="chevron">▼</span>
+                                </button>
+                                <div
+                                    class="select-dropdown"
+                                    id="team1Dropdown"
+                                ></div>
+                            </div>
+                            <select id="year1"></select>
+                        </div>
+                    </div>
+
+                    <div class="team-card" id="teamCard2">
+                        <div class="team-logo-wrap">
+                            <img
+                                id="team2Logo"
+                                class="team-logo"
+                                alt="Team 2 logo"
+                            />
+                        </div>
+                        <div class="team-controls">
+                            <!-- Custom team selector 2 -->
+                            <div class="custom-select" id="team2Custom">
+                                <button
+                                    type="button"
+                                    class="select-trigger"
+                                    id="team2Trigger"
+                                >
+                                    <span class="trigger-content"
+                                        >Select Team</span
+                                    >
+                                    <span class="chevron">▼</span>
+                                </button>
+                                <div
+                                    class="select-dropdown"
+                                    id="team2Dropdown"
+                                ></div>
+                            </div>
+                            <select id="year2"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="predict-center">
+                    <button id="predictBtn" class="primary">
+                        Run Simulation
+                    </button>
+                </div>
+
+                <div id="result" class="result"></div>
+            </section>
+        </main>
+
+        <script src="/script.js"></script>
+    </body>
+</html>

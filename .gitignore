@@ -1,0 +1,10 @@
+.venv/
+
+bs/
+
+data_backup/
+data/
+src/__pycache__
+src/evaluate.py
+models/
+web/cricket_stadium.glb
